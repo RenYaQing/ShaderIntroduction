@@ -57,11 +57,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _Center: -0.061
+    - _Center: -0.112
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Fill: 0.134
+    - _Fill: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -78,4 +78,4 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainColor: {r: 0.9339623, g: 0.066082224, b: 0.066082224, a: 1}
-    - _SecondColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SecondColor: {r: 0.9245283, g: 0.8269378, b: 0.2660199, a: 1}

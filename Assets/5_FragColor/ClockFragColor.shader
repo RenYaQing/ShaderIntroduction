@@ -45,7 +45,6 @@
             
             fixed4 frag(v2f i): COLOR
             {
-                float4 color;
                 if (_Fill < 0.5)
                 {
                     //将_Fill 0-0.5的值，映射给0-pie，只处理左半边，右半边全部按照 _MainColor处理

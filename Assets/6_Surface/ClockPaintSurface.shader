@@ -37,12 +37,14 @@
         struct Input
         {
             float2 uv_MainTex;
-            float y;
+            float x;
+            float z;
         };
         void vert(inout appdata_full v, out Input o)
         {
             o.uv_MainTex = v.texcoord.xy;
-            o.y = v.vertex.x;
+            o.x = v.vertex.x;
+            o.z = v.vertex.z;
         }
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
@@ -62,13 +64,34 @@
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
 
-            float d = IN.y - _Center;//d小于0，则y在center的下方
-            float s = abs(d);
-            d = d / s;//正负1
-            float rate = saturate(s / _R);
-            d *= rate;
-            d = d / 2 + 0.5;//(0,1)
-            o.Albedo *= lerp(_MainColor, _SecondColor, d);
+            if (_Fill < 0.5)
+            {
+                //将_Fill 0-0.5的值，映射给0-pie，只处理左半边，右半边全部按照 _MainColor处理
+                float compare = (_Fill * 2 - 0.5) * 3.1415926;
+                float theta = -atan(IN.z / IN.x);
+                if (theta > compare)
+                {
+                    o.Albedo *= _MainColor;
+                }
+                if(IN.x > 0)
+                {
+                    o.Albedo *=  _MainColor;
+                }
+            }
+            else
+            {
+                //将_Fill 0.5-1映射给0-pie，左半边按照 _SecondColor处理
+                float compare = ((_Fill - 0.5) * 2 - 0.5) * 3.1415926;
+                float theta = -atan(IN.z / IN.x);
+                if (IN.x > 0)
+                {
+                    if(theta > compare)
+                    {
+                        o.Albedo *=  _MainColor;
+                    }
+                }
+            }
+            o.Albedo *= _SecondColor;
         }
         ENDCG
         
