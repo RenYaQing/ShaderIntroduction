@@ -1,4 +1,4 @@
-﻿Shader "Custom/PaintSurface"
+﻿Shader "Custom/ClockPaintSurface"
 {
     Properties
     {
@@ -6,6 +6,7 @@
         _SecondColor ("SecondColor", Color) = (1, 1, 1, 1)
         _Center ("Center", Range(-2.73, 2.73)) = 0
         _R ("R", Range(0, 0.5)) = 0.2
+        _Fill ("Fill", Range(0, 1)) = 0
 
         _MainTex ("Albedo (RGB)", 2D) = "white" { }
         _Glossiness ("Smoothness", Range(0, 1)) = 0.5
@@ -22,6 +23,7 @@
         float4 _SecondColor;
         float _Center;
         float _R;
+        float _Fill;
         // Physically based Standard lighting model, and enable shadows on all light types
         #pragma surface surf Standard vertex:vert fullforwardshadows
 
