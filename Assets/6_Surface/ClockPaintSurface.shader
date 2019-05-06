@@ -11,6 +11,9 @@
         _MainTex ("Albedo (RGB)", 2D) = "white" { }
         _Glossiness ("Smoothness", Range(0, 1)) = 0.5
         _Metallic ("Metallic", Range(0, 1)) = 0.0
+
+        _EmissionColor ("EmissionColor", COLOR) = (1, 0, 0, 1)
+        _RimPower ("RimPower", Range(0, 1)) = 0
     }
     SubShader
     {
@@ -34,11 +37,16 @@
         half _Glossiness;
         half _Metallic;
 
+        fixed4 _EmissionColor;    //定义颜色
+        fixed _RimPower;
+
+
         struct Input
         {
             float2 uv_MainTex;
             float x;
             float z;
+            // float3 viewDir;
         };
         void vert(inout appdata_full v, out Input o)
         {
@@ -63,35 +71,46 @@
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
-
             if (_Fill < 0.5)
             {
-                //将_Fill 0-0.5的值，映射给0-pie，只处理左半边，右半边全部按照 _MainColor处理
-                float compare = (_Fill * 2 - 0.5) * 3.1415926;
+                //将_Fill 0-0.5的值，映射给-pi/2到pi/2，只处理左半边，右半边全部按照 _MainColor处理
+                float compare = (_Fill * 2 - 0.5) * UNITY_PI;
                 float theta = -atan(IN.z / IN.x);
                 if (theta > compare)
                 {
-                    o.Albedo *= _MainColor;
+                    o.Albedo = _MainColor;//blue
                 }
-                if(IN.x > 0)
+                
+                if (IN.x > 0)
                 {
-                    o.Albedo *=  _MainColor;
+                    o.Albedo = _MainColor;
                 }
+                // o.Albedo *= lerp(_MainColor, _SecondColor, d)
             }
-            else
+            if (_Fill >= 0.5)
             {
-                //将_Fill 0.5-1映射给0-pie，左半边按照 _SecondColor处理
-                float compare = ((_Fill - 0.5) * 2 - 0.5) * 3.1415926;
+                //将_Fill 0.5-1映射给-pi/2到pi/2，左半边按照 _SecondColor处理
+                float compare = ((_Fill - 0.5) * 2 - 0.5) * UNITY_PI;
                 float theta = -atan(IN.z / IN.x);
                 if (IN.x > 0)
                 {
                     if(theta > compare)
                     {
-                        o.Albedo *=  _MainColor;
+                        o.Albedo = _MainColor;
                     }
                 }
             }
-            o.Albedo *= _SecondColor;
+            // float rim = 1 - abs(dot(o.Normal, normalize(IN.viewDir)));
+            // // 方式1： o.Emission=_EmissionColor*rim*_RimPower;
+            // o.Emission = _EmissionColor * pow(rim, _RimPower); // 方式2：
+
+
+            // o.Albedo = _SecondColor;
+
+            // float d=_Fill-0.5;
+            //  d = d / abs(d);//正负1
+            // d = d / 2 + 0.5;//(0,1)
+            //  o.Albedo *= lerp(_MainColor, _SecondColor, d);
         }
         ENDCG
         
