@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/7_OutLine/OutLine.unity
+    guid: 5988fed1de60c064c9d11c3e10ba3c9a
   m_configObjects: {}
