@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 485014441}
   - component: {fileID: 485014440}
   m_Layer: 5
-  m_Name: Image
+  m_Name: UIVignetteMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -278,12 +278,12 @@ GameObject:
   - component: {fileID: 934661112}
   - component: {fileID: 934661111}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: UICircleMask1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &934661110
 RectTransform:
   m_ObjectHideFlags: 0
@@ -587,7 +587,7 @@ GameObject:
   - component: {fileID: 1621007019}
   - component: {fileID: 1621007018}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: UICircleMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -659,12 +659,12 @@ GameObject:
   - component: {fileID: 1731183282}
   - component: {fileID: 1731183281}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: UIOvilMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1731183280
 RectTransform:
   m_ObjectHideFlags: 0

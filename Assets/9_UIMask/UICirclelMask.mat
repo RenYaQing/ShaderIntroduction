@@ -77,7 +77,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Progress: 0.198
-    - _Radius: 60.25
+    - _Radius: 129
     - _Sharp: 7.19
     - _SmoothnessTextureChannel: 0
     - _Soft: 6.32
